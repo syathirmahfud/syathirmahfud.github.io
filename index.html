@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Muhammad Syathir Mahfud — Portfolio & Systems Architecture</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <style>
+    @keyframes spin-slow {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .animate-spin-slow {
+      animation: spin-slow 8s linear infinite;
+    }
+    .perspective-container {
+      perspective: 1200px;
+    }
+    /* Sleek dark scrollbar */
+    ::-webkit-scrollbar {
+      width: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #09090b;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #27272a;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3f3f46;
+    }
+    .terminal-scroll::-webkit-scrollbar {
+      width: 4px;
+    }
+  </style>
+</head>
+<body class="bg-zinc-950 text-zinc-100 min-h-screen overflow-x-hidden selection:bg-cyan-500/30 font-sans antialiased">
+
+  <!-- Three.js Canvas Container (Antigravity Particles) -->
+  <div id="canvas-container" class="fixed inset-0 pointer-events-none z-0"></div>
+
+  <!-- Header / Navigation Bar -->
+  <header class="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-zinc-950/70 border-b border-zinc-800/60 px-6 py-4">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-500 to-purple-600 flex items-center justify-center font-mono font-black text-white text-base shadow-[0_0_15px_rgba(56,189,248,0.4)]">
+          SM
+        </div>
+        <div>
+          <span class="font-bold tracking-tight text-zinc-100 text-sm block">M. SYATHIR MAHFUD</span>
+          <span class="text-[11px] font-mono text-zinc-400 block -mt-0.5">AI Systems & Geospatial Engineer</span>
+        </div>
+      </div>
+
+      <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-zinc-400">
+        <a href="#flagship" class="hover:text-cyan-400 transition-colors">Architecture</a>
+        <a href="#projects" class="hover:text-cyan-400 transition-colors">Projects</a>
+        <a href="#stats" class="hover:text-cyan-400 transition-colors">Network Metrics</a>
+        <a href="#terminal" class="hover:text-cyan-400 transition-colors font-mono text-xs text-purple-400 bg-purple-950/40 px-3 py-1 rounded-full border border-purple-800/50">Live Console</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <div class="hidden sm:flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-800/50 text-[11px] font-mono text-emerald-400">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>Harness² Operational</span>
+        </div>
+        <a href="mailto:syathirmahfud1@gmail.com" class="px-4 py-2 rounded-lg text-xs font-semibold bg-zinc-100 hover:bg-white text-zinc-950 shadow-md transition-all hover:scale-105 active:scale-95">
+          Contact
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 1. Hero Section (Antigravity Canvas & Introduction) -->
+  <section id="hero" class="relative z-10 min-h-screen flex flex-col justify-center items-center px-6 pt-28 pb-16 max-w-7xl mx-auto">
+    <div id="hero-header" class="text-center max-w-4xl mx-auto will-change-transform">
+      
+      <!-- Top Badge -->
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-950/30 text-cyan-300 text-xs font-mono uppercase tracking-widest mb-8 backdrop-blur-md shadow-[0_0_20px_rgba(56,189,248,0.2)]">
+        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+        <span>PKRMS Civil Infrastructure • Computer Vision • Multi-Agent Systems</span>
+      </div>
+
+      <!-- Main Headline -->
+      <h1 class="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tight mb-8 bg-clip-text text-transparent bg-gradient-to-b from-white via-zinc-200 to-zinc-500 leading-[1.05]">
+        Building High-Reliability <br />
+        <span class="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500">
+          Engineering Intelligence
+        </span>
+      </h1>
+
+      <p class="text-lg sm:text-2xl text-zinc-300 max-w-3xl mx-auto leading-relaxed mb-10 font-light">
+        Architect of large-scale road survey automation, recursive agent harnesses (<span class="font-mono text-cyan-400 font-medium">Harness²</span>), 
+        and deterministic computer vision pipelines processing thousands of kilometers of national infrastructure.
+      </p>
+
+      <!-- Key Call-to-Actions -->
+      <div class="flex flex-wrap items-center justify-center gap-4 mb-14">
+        <a href="#flagship" class="group px-7 py-4 rounded-xl font-semibold text-sm text-zinc-950 bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 shadow-[0_0_35px_rgba(56,189,248,0.45)] transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center gap-2.5">
+          <span>Explore Flagship Systems</span>
+          <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </a>
+
+        <a href="#terminal" class="px-7 py-4 rounded-xl font-medium text-sm text-zinc-300 bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-800 hover:border-zinc-700 backdrop-blur-md transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center gap-2.5">
+          <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          <span>Open Interactive Console</span>
+        </a>
+      </div>
+
+      <!-- Quick Metrics Bar -->
+      <div id="stats" class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto pt-6 border-t border-zinc-800/80 text-left">
+        <div class="p-4 rounded-xl bg-zinc-900/40 border border-zinc-800/60 backdrop-blur-md">
+          <div class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">6,440 km</div>
+          <div class="text-xs font-mono text-zinc-400 mt-1">Total Road Network Processed</div>
+        </div>
+        <div class="p-4 rounded-xl bg-zinc-900/40 border border-zinc-800/60 backdrop-blur-md">
+          <div class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">1,222</div>
+          <div class="text-xs font-mono text-zinc-400 mt-1">Official SK Survey Links</div>
+        </div>
+        <div class="p-4 rounded-xl bg-zinc-900/40 border border-zinc-800/60 backdrop-blur-md">
+          <div class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400">7 Districts</div>
+          <div class="text-xs font-mono text-zinc-400 mt-1">Provinsi Jambi Civil Scope</div>
+        </div>
+        <div class="p-4 rounded-xl bg-zinc-900/40 border border-zinc-800/60 backdrop-blur-md">
+          <div class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400">37+ Tools</div>
+          <div class="text-xs font-mono text-zinc-400 mt-1">Deterministic Engineering CLI</div>
+        </div>
+      </div>
+
+      <!-- Scroll Indicator -->
+      <div class="mt-12 text-xs font-mono text-zinc-500 flex items-center justify-center gap-2">
+        <svg class="w-4 h-4 animate-bounce text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+        <span>Scroll down to experience the pinned 3D architecture scrub</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 2. Pinned GSAP ScrollTrigger Showcase (The 3 Flagship Architecture Pillars) -->
+  <section id="flagship" class="relative z-10 min-h-screen flex flex-col justify-center items-center px-6 py-24 max-w-7xl mx-auto">
+    <div id="flagship-header" class="text-center max-w-3xl mx-auto mb-14 will-change-transform">
+      <span class="text-xs font-mono uppercase tracking-widest text-cyan-400 bg-cyan-950/60 border border-cyan-800/50 px-3 py-1 rounded-full">
+        Core Pillars
+      </span>
+      <h2 class="text-4xl sm:text-5xl font-black tracking-tight mt-4 mb-4 text-zinc-100">
+        Architectural Competencies
+      </h2>
+      <p class="text-zinc-400 text-sm sm:text-base leading-relaxed">
+        Engineering systems designed for mission-critical civil telemetry, zero context degradation, and multi-model autonomous verification.
+      </p>
+    </div>
+
+    <!-- Pinned Grid with 3D Perspective -->
+    <div id="flagship-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl perspective-container">
+      
+      <!-- Card 1 -->
+      <div id="card-1" class="relative group rounded-2xl p-[1px] overflow-hidden shadow-2xl bg-gradient-to-b from-white/10 to-transparent backdrop-blur-2xl will-change-transform">
+        <div class="absolute inset-[-150%] animate-spin-slow bg-[conic-gradient(from_0deg,transparent_0_300deg,#38bdf8_330deg,#a855f7_360deg)] opacity-40 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div class="relative z-10 rounded-[15px] bg-zinc-950/90 p-8 flex flex-col justify-between h-full border border-zinc-800/60 backdrop-blur-xl">
+          <div>
+            <div class="flex items-center justify-between mb-6">
+              <span class="text-xs font-mono font-semibold tracking-wider text-cyan-400 bg-cyan-950/60 border border-cyan-800/50 px-3 py-1 rounded-full">PILLAR 01</span>
+              <div class="p-2.5 rounded-xl bg-zinc-900 border border-zinc-700/50 text-cyan-400 shadow-inner">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+              </div>
+            </div>
+            <h3 class="text-xl font-bold text-zinc-100 tracking-tight mb-2.5">Harness² Multi-Agent Engine</h3>
+            <p class="text-zinc-400 text-sm leading-relaxed mb-6">
+              Pioneered the dual-recursion agent harness architecture. Orchestrates isolated subagents across thousands of civil assets with deterministic score gates and self-evolving memory (<code class="text-cyan-300 text-xs">PINNED.md</code>).
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-2 pt-4 border-t border-zinc-800/80">
+            <span class="text-[11px] font-mono text-zinc-400 bg-zinc-900/90 px-2.5 py-1 rounded-md border border-zinc-800">Orchestration</span>
+            <span class="text-[11px] font-mono text-zinc-400 bg-zinc-900/90 px-2.5 py-1 rounded-md border border-zinc-800">Score Gates</span>
+            <span class="text-[11px] font-mono text-zinc-400 bg-zinc-900/90 px-2.5 py-1 rounded-md border border-zinc-800">Token Circuit-Breaker</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div id="card-2" class="relative group rounded-2xl p-[1px] overflow-hidden shadow-2xl bg-gradient-to-b from-white/10 to-transparent backdrop-blur-2xl will-change-transform">
+        <div class="absolute inset-[-150%] animate-spin-slow bg-[conic-gradient(from_0deg,transparent_0_300deg,#38bdf8_330deg,#a855f7_360deg)] opacity-40 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div class="relative z-10 rounded-[15px] bg-zinc-950/90 p-8 flex flex-col justify-between h-full border border-zinc-800/60 backdrop-blur-xl">
+          <div>
+            <div class="flex items-center justify-between mb-6">
+              <span class="text-xs font-mono font-semibold tracking-wider text-purple-400 bg-purple-950/60 border border-purple-800/50 px-3 py-1 rounded-full">PILLAR 02</span>
+              <div class="p-2.5 rounded-xl bg-zinc-900 border border-zinc-700/50 text-purple-400 shadow-inner">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+              </div>
+            </div>
+            <h3 class="text-xl font-bold text-zinc-100 tracking-tight mb-2.5">Computer Vision & Telemetry</h3>
+            <p class="text-zinc-400 text-sm leading-relaxed mb-6">
+              Engineered high-throughput 100m video frame extraction pipelines, BlackVue/GoPro sub-second spatial retiming, and YOLO road surface distress classification across 4K survey footage.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-2 pt-4 border-t border-zinc-800/80">
+            <span class="text-[11px] font-mono text-zinc-400 bg-zinc-900/90 px-2.5 py-1 rounded-md border border-zinc-800">YOLOv8 / OpenCV</span>
+            <span class="text-[11px] font-mono text-zinc-400 bg-zinc-900/90 px-2.5 py-1 rounded-md border border-zinc-800">BlackVue GPMF</span>
+            <span class="text-[11px] font-mono text-zinc-400 bg-zinc-900/90 px-2.5 py-1 rounded-md border border-zinc-800">Haversine STA Stepping</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div id="card-3" class="relative group rounded-2xl p-[1px] overflow-hidden shadow-2xl bg-gradient-to-b from-white/10 to-transparent backdrop-blur-2xl will-change-transform">
+        <div class="absolute inset-[-150%] animate-spin-slow bg-[conic-gradient(from_0deg,transparent_0_300deg,#38bdf8_330deg,#a855f7_360deg)] opacity-40 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div class="relative z-10 rounded-[15px] bg-zinc-950/90 p-8 flex flex-col justify-between h-full border border-zinc-800/60 backdrop-blur-xl">
+          <div>
+            <div class="flex items-center justify-between mb-6">
+              <span class="text-xs font-mono font-semibold tracking-wider text-emerald-400 bg-emerald-950/60 border border-emerald-800/50 px-3 py-1 rounded-full">PILLAR 03</span>
+              <div class="p-2.5 rounded-xl bg-zinc-900 border border-zinc-700/50 text-emerald-400 shadow-inner">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+              </div>
+            </div>
+            <h3 class="text-xl font-bold text-zinc-100 tracking-tight mb-2.5">GIS, Bridges & Report Engines</h3>
+            <p class="text-zinc-400 text-sm leading-relaxed mb-6">
+              Built the Electron-based PKRMS Bridge Desktop Dashboard, automated GIS KMZ-to-database synchronization, and the canonical PKRMS Road Condition PDF reporting engine.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-2 pt-4 border-t border-zinc-800/80">
+            <span class="text-[11px] font-mono text-zinc-400 bg-zinc-900/90 px-2.5 py-1 rounded-md border border-zinc-800">Electron + Vite</span>
+            <span class="text-[11px] font-mono text-zinc-400 bg-zinc-900/90 px-2.5 py-1 rounded-md border border-zinc-800">DAO MS Access COM</span>
+            <span class="text-[11px] font-mono text-zinc-400 bg-zinc-900/90 px-2.5 py-1 rounded-md border border-zinc-800">PyMuPDF / Strip-Maps</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 3. Featured Production Projects -->
+  <section id="projects" class="relative z-10 py-24 px-6 max-w-7xl mx-auto border-t border-zinc-800/80">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+      <div>
+        <span class="text-xs font-mono uppercase tracking-widest text-purple-400 bg-purple-950/60 border border-purple-800/50 px-3 py-1 rounded-full">
+          Production Systems
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-black tracking-tight mt-3 text-zinc-100">
+          Featured Engineering Deliverables
+        </h2>
+      </div>
+      <p class="text-zinc-400 text-sm max-w-md mt-4 md:mt-0">
+        Deterministic applications, automation tools, and data engines used in live government road surveys.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      
+      <!-- Project 1: PKRMS Bridge Dashboard -->
+      <div class="rounded-2xl p-6 bg-zinc-900/50 border border-zinc-800/80 hover:border-cyan-500/50 transition-all duration-300 hover:-translate-y-1 backdrop-blur-md flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-xs font-mono text-cyan-400">Desktop Application</span>
+            <span class="text-[11px] font-mono bg-zinc-800 px-2 py-0.5 rounded text-zinc-400">Electron • Vite</span>
+          </div>
+          <h4 class="text-lg font-bold text-zinc-100 mb-2">PKRMS Bridge Dashboard</h4>
+          <p class="text-zinc-400 text-xs leading-relaxed mb-6">
+            Interactive desktop interface parsing bridge inventory placemarks from Google Earth KMZ archives, cross-matching BMS codes, and integrating directly with MS Access backends.
+          </p>
+        </div>
+        <div class="flex flex-wrap gap-1.5 pt-4 border-t border-zinc-800/60">
+          <span class="text-[10px] font-mono bg-zinc-800/70 text-zinc-300 px-2 py-0.5 rounded">TypeScript</span>
+          <span class="text-[10px] font-mono bg-zinc-800/70 text-zinc-300 px-2 py-0.5 rounded">Tailwind</span>
+          <span class="text-[10px] font-mono bg-zinc-800/70 text-zinc-300 px-2 py-0.5 rounded">GIS XML/KMZ</span>
+        </div>
+      </div>
+
+      <!-- Project 2: PKRMS PDF Report Engine -->
+      <div class="rounded-2xl p-6 bg-zinc-900/50 border border-zinc-800/80 hover:border-purple-500/50 transition-all duration-300 hover:-translate-y-1 backdrop-blur-md flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-xs font-mono text-purple-400">Civil Engineering Engine</span>
+            <span class="text-[11px] font-mono bg-zinc-800 px-2 py-0.5 rounded text-zinc-400">Python 3.12</span>
+          </div>
+          <h4 class="text-lg font-bold text-zinc-100 mb-2">PKRMS Road Condition PDF Generator</h4>
+          <p class="text-zinc-400 text-xs leading-relaxed mb-6">
+            Automated production generator that queries PKRMS Access databases via temp DAO sandboxes, compiles road condition ratings into strip-maps, and binds telemetry photos.
+          </p>
+        </div>
+        <div class="flex flex-wrap gap-1.5 pt-4 border-t border-zinc-800/60">
+          <span class="text-[10px] font-mono bg-zinc-800/70 text-zinc-300 px-2 py-0.5 rounded">ReportLab</span>
+          <span class="text-[10px] font-mono bg-zinc-800/70 text-zinc-300 px-2 py-0.5 rounded">DAO.DBEngine.120</span>
+          <span class="text-[10px] font-mono bg-zinc-800/70 text-zinc-300 px-2 py-0.5 rounded">PyMuPDF</span>
+        </div>
+      </div>
+
+      <!-- Project 3: VIRB Automation Suite -->
+      <div class="rounded-2xl p-6 bg-zinc-900/50 border border-zinc-800/80 hover:border-blue-500/50 transition-all duration-300 hover:-translate-y-1 backdrop-blur-md flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-xs font-mono text-blue-400">Telemetry Automation</span>
+            <span class="text-[11px] font-mono bg-zinc-800 px-2 py-0.5 rounded text-zinc-400">PowerShell • XML</span>
+          </div>
+          <h4 class="text-lg font-bold text-zinc-100 mb-2">Garmin VIRB Project Generator</h4>
+          <p class="text-zinc-400 text-xs leading-relaxed mb-6">
+            Headless automation engine generating native Garmin VIRB Edit 5.4.3 project manifests with sub-second GPX sync, track offset calibrations, and binary hash generation.
+          </p>
+        </div>
+        <div class="flex flex-wrap gap-1.5 pt-4 border-t border-zinc-800/60">
+          <span class="text-[10px] font-mono bg-zinc-800/70 text-zinc-300 px-2 py-0.5 rounded">Binary Hashing</span>
+          <span class="text-[10px] font-mono bg-zinc-800/70 text-zinc-300 px-2 py-0.5 rounded">GPX Telemetry</span>
+          <span class="text-[10px] font-mono bg-zinc-800/70 text-zinc-300 px-2 py-0.5 rounded">Batch Rendering</span>
+        </div>
+      </div>
+
+      <!-- Project 4: YOLO Road Defect Detector -->
+      <div class="rounded-2xl p-6 bg-zinc-900/50 border border-zinc-800/80 hover:border-emerald-500/50 transition-all duration-300 hover:-translate-y-1 backdrop-blur-md flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-xs font-mono text-emerald-400">Deep Learning</span>
+            <span class="text-[11px] font-mono bg-zinc-800 px-2 py-0.5 rounded text-zinc-400">PyTorch • YOLOv8</span>
+          </div>
+          <h4 class="text-lg font-bold text-zinc-100 mb-2">Road Defect Vision Pipeline</h4>
+          <p class="text-zinc-400 text-xs leading-relaxed mb-6">
+            Custom computer vision model trained to classify asphalt potholes, alligator cracking, ravelling, and rutting directly from BlackVue survey dashcam streams.
+          </p>
+        </div>
+        <div class="flex flex-wrap gap-1.5 pt-4 border-t border-zinc-800/60">
+          <span class="text-[10px] font-mono bg-zinc-800/70 text-zinc-300 px-2 py-0.5 rounded">YOLOv8</span>
+          <span class="text-[10px] font-mono bg-zinc-800/70 text-zinc-300 px-2 py-0.5 rounded">OpenCV</span>
+          <span class="text-[10px] font-mono bg-zinc-800/70 text-zinc-300 px-2 py-0.5 rounded">Distress Mapping</span>
+        </div>
+      </div>
+
+      <!-- Project 5: Spatial GPX Retimer -->
+      <div class="rounded-2xl p-6 bg-zinc-900/50 border border-zinc-800/80 hover:border-amber-500/50 transition-all duration-300 hover:-translate-y-1 backdrop-blur-md flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-xs font-mono text-amber-400">Spatial Math Tool</span>
+            <span class="text-[11px] font-mono bg-zinc-800 px-2 py-0.5 rounded text-zinc-400">Python • PyQt</span>
+          </div>
+          <h4 class="text-lg font-bold text-zinc-100 mb-2">GPS Retimer & Chord Normalizer</h4>
+          <p class="text-zinc-400 text-xs leading-relaxed mb-6">
+            Eliminates high-speed corner-cutting error in 1 Hz GPS tracks by applying haversine station stepping and anchoring video timestamps to official road chainage stations.
+          </p>
+        </div>
+        <div class="flex flex-wrap gap-1.5 pt-4 border-t border-zinc-800/60">
+          <span class="text-[10px] font-mono bg-zinc-800/70 text-zinc-300 px-2 py-0.5 rounded">Haversine</span>
+          <span class="text-[10px] font-mono bg-zinc-800/70 text-zinc-300 px-2 py-0.5 rounded">Geodesic Math</span>
+          <span class="text-[10px] font-mono bg-zinc-800/70 text-zinc-300 px-2 py-0.5 rounded">GPX / KML</span>
+        </div>
+      </div>
+
+      <!-- Project 6: Usage & Token Forensic Monitor -->
+      <div class="rounded-2xl p-6 bg-zinc-900/50 border border-zinc-800/80 hover:border-cyan-500/50 transition-all duration-300 hover:-translate-y-1 backdrop-blur-md flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-xs font-mono text-cyan-400">Agentic Observability</span>
+            <span class="text-[11px] font-mono bg-zinc-800 px-2 py-0.5 rounded text-zinc-400">Node.js • API</span>
+          </div>
+          <h4 class="text-lg font-bold text-zinc-100 mb-2">Agent Usage & Token Circuit Breaker</h4>
+          <p class="text-zinc-400 text-xs leading-relaxed mb-6">
+            Real-time local telemetry server monitoring subagent token velocity, session context windows, and enforcing rate-limit circuit breakers on runaway loops.
+          </p>
+        </div>
+        <div class="flex flex-wrap gap-1.5 pt-4 border-t border-zinc-800/60">
+          <span class="text-[10px] font-mono bg-zinc-800/70 text-zinc-300 px-2 py-0.5 rounded">HTTP Server</span>
+          <span class="text-[10px] font-mono bg-zinc-800/70 text-zinc-300 px-2 py-0.5 rounded">Log Parser</span>
+          <span class="text-[10px] font-mono bg-zinc-800/70 text-zinc-300 px-2 py-0.5 rounded">Cost Analytics</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 4. Interactive Live Terminal / Console Widget -->
+  <section id="terminal" class="relative z-10 py-24 px-6 max-w-5xl mx-auto border-t border-zinc-800/80">
+    <div class="text-center mb-10">
+      <span class="text-xs font-mono uppercase tracking-widest text-emerald-400 bg-emerald-950/60 border border-emerald-800/50 px-3 py-1 rounded-full">
+        Interactive Console
+      </span>
+      <h2 class="text-3xl sm:text-4xl font-black tracking-tight mt-3 text-zinc-100">
+        Query Engineer Profile via CLI
+      </h2>
+      <p class="text-zinc-400 text-sm mt-2">
+        Click a quick command or type in the interactive prompt below.
+      </p>
+    </div>
+
+    <!-- Terminal Window -->
+    <div class="rounded-2xl border border-zinc-800 bg-zinc-950/90 shadow-2xl backdrop-blur-xl overflow-hidden font-mono text-xs">
+      
+      <!-- Terminal Top Bar -->
+      <div class="bg-zinc-900/90 px-4 py-3 border-b border-zinc-800 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
+          <span class="w-3 h-3 rounded-full bg-yellow-500/80 inline-block"></span>
+          <span class="w-3 h-3 rounded-full bg-green-500/80 inline-block"></span>
+          <span class="text-zinc-400 ml-2 font-semibold">syath@harness2-orchestrator:~</span>
+        </div>
+        <div class="text-zinc-500 text-[11px]">bash 5.2 • session active</div>
+      </div>
+
+      <!-- Quick Command Buttons -->
+      <div class="bg-zinc-900/40 px-4 py-2.5 border-b border-zinc-800/60 flex flex-wrap gap-2 items-center">
+        <span class="text-zinc-500 text-[11px]">Try commands:</span>
+        <button onclick="runCommand('syath --bio')" class="px-2.5 py-1 rounded bg-zinc-800 hover:bg-zinc-700 text-cyan-300 text-[11px] transition-colors">syath --bio</button>
+        <button onclick="runCommand('syath --stack')" class="px-2.5 py-1 rounded bg-zinc-800 hover:bg-zinc-700 text-purple-300 text-[11px] transition-colors">syath --stack</button>
+        <button onclick="runCommand('syath --network')" class="px-2.5 py-1 rounded bg-zinc-800 hover:bg-zinc-700 text-emerald-300 text-[11px] transition-colors">syath --network</button>
+        <button onclick="runCommand('syath --contact')" class="px-2.5 py-1 rounded bg-zinc-800 hover:bg-zinc-700 text-amber-300 text-[11px] transition-colors">syath --contact</button>
+        <button onclick="clearTerminal()" class="px-2.5 py-1 rounded bg-zinc-900 hover:bg-zinc-800 text-zinc-400 text-[11px] transition-colors ml-auto">clear</button>
+      </div>
+
+      <!-- Terminal Output Log -->
+      <div id="terminal-output" class="p-5 h-80 overflow-y-auto space-y-3 leading-relaxed terminal-scroll text-zinc-300">
+        <div>
+          <span class="text-zinc-500"># Welcome to the interactive engineering terminal of Muhammad Syathir Mahfud.</span><br/>
+          <span class="text-zinc-500"># Type `help` or click the command chips above to inspect architecture, projects, or metrics.</span>
+        </div>
+      </div>
+
+      <!-- Terminal Input Line -->
+      <div class="bg-zinc-900/70 px-5 py-3 border-t border-zinc-800 flex items-center gap-3">
+        <span class="text-cyan-400 font-bold">syath&gt;</span>
+        <input 
+          id="terminal-input"
+          type="text" 
+          placeholder="type command (e.g., syath --bio, syath --stack) and press Enter..." 
+          class="bg-transparent text-zinc-100 flex-1 outline-none border-none placeholder:text-zinc-600 font-mono text-xs"
+          onkeydown="handleTerminalKey(event)"
+        />
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 5. Footer & Contact -->
+  <footer class="relative z-10 py-16 px-6 border-t border-zinc-800/80 bg-zinc-950/80 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+      <div>
+        <h4 class="font-bold text-zinc-100 text-base">Muhammad Syathir Mahfud</h4>
+        <p class="text-zinc-400 text-xs mt-1">Autonomous Systems • PKRMS Road & Bridge Engineering • Computer Vision</p>
+      </div>
+      <div class="flex items-center gap-6 text-xs text-zinc-400 font-mono">
+        <a href="mailto:syathirmahfud1@gmail.com" class="hover:text-cyan-400 transition-colors">syathirmahfud1@gmail.com</a>
+        <a href="https://github.com" target="_blank" class="hover:text-cyan-400 transition-colors">GitHub</a>
+        <span class="text-zinc-600">Jambi, Indonesia</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts: Three.js Particles + GSAP ScrollTrigger + Terminal Engine -->
+  <script>
+    // ─────────────────────────────────────────────────────────────
+    // 1. Three.js Antigravity Particle Field
+    // ─────────────────────────────────────────────────────────────
+    const container = document.getElementById('canvas-container');
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 45;
+
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: 'high-performance' });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    container.appendChild(renderer.domElement);
+
+    const PARTICLE_COUNT = 1500;
+    const geometry = new THREE.BufferGeometry();
+    const positions = new Float32Array(PARTICLE_COUNT * 3);
+    const basePositions = new Float32Array(PARTICLE_COUNT * 3);
+    const colors = new Float32Array(PARTICLE_COUNT * 3);
+
+    const colorCyan = new THREE.Color('#38bdf8');
+    const colorPurple = new THREE.Color('#a855f7');
+
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      const x = (Math.random() - 0.5) * 125;
+      const y = (Math.random() - 0.5) * 90;
+      const z = (Math.random() - 0.5) * 65;
+
+      positions[i * 3] = x;
+      positions[i * 3 + 1] = y;
+      positions[i * 3 + 2] = z;
+
+      basePositions[i * 3] = x;
+      basePositions[i * 3 + 1] = y;
+      basePositions[i * 3 + 2] = z;
+
+      const mixed = colorCyan.clone().lerp(colorPurple, Math.random());
+      colors[i * 3] = mixed.r;
+      colors[i * 3 + 1] = mixed.g;
+      colors[i * 3 + 2] = mixed.b;
+    }
+
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+    const material = new THREE.PointsMaterial({
+      size: 0.65,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.75,
+      blending: THREE.AdditiveBlending,
+    });
+
+    const particles = new THREE.Points(geometry, material);
+    scene.add(particles);
+
+    // Mouse Tracking in 3D Space
+    const mouse = { x: 9999, y: 9999, targetX: 9999, targetY: 9999 };
+    window.addEventListener('mousemove', (e) => {
+      const ndcX = (e.clientX / window.innerWidth) * 2 - 1;
+      const ndcY = -(e.clientY / window.innerHeight) * 2 + 1;
+      mouse.targetX = ndcX * 55;
+      mouse.targetY = ndcY * 40;
+    });
+
+    const clock = new THREE.Clock();
+    function animate() {
+      requestAnimationFrame(animate);
+      const elapsed = clock.getElapsedTime();
+
+      // Smooth mouse lerp
+      mouse.x += (mouse.targetX - mouse.x) * 0.08;
+      mouse.y += (mouse.targetY - mouse.y) * 0.08;
+
+      const pos = geometry.attributes.position.array;
+
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
+        const i3 = i * 3;
+        const bx = basePositions[i3];
+        const by = basePositions[i3 + 1];
+        const bz = basePositions[i3 + 2];
+
+        // 1. Natural weightless drift
+        const targetX = bx + Math.sin(elapsed * 0.4 + i) * 1.5;
+        const targetY = by + Math.cos(elapsed * 0.3 + i * 0.5) * 1.5;
+        const targetZ = bz + Math.sin(elapsed * 0.2 + i * 0.2) * 1.0;
+
+        // 2. Antigravity repulsion from cursor
+        const dx = pos[i3] - mouse.x;
+        const dy = pos[i3 + 1] - mouse.y;
+        const dist = Math.hypot(dx, dy);
+        const REPEL_RADIUS = 16;
+
+        if (dist < REPEL_RADIUS) {
+          const force = (1 - dist / REPEL_RADIUS) * 4.5;
+          pos[i3] += (dx / dist) * force;
+          pos[i3 + 1] += (dy / dist) * force;
+        } else {
+          // Smooth return to base orbit
+          pos[i3] += (targetX - pos[i3]) * 0.04;
+          pos[i3 + 1] += (targetY - pos[i3 + 1]) * 0.04;
+          pos[i3 + 2] += (targetZ - pos[i3 + 2]) * 0.04;
+        }
+      }
+
+      geometry.attributes.position.needsUpdate = true;
+      particles.rotation.y = elapsed * 0.02;
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    // ─────────────────────────────────────────────────────────────
+    // 2. GSAP ScrollTrigger Section Pinning & 3D Card Scrub
+    // ─────────────────────────────────────────────────────────────
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.set(['#card-1', '#card-2', '#card-3'], {
+      opacity: 0,
+      y: 130,
+      scale: 0.85,
+      rotateX: 20
+    });
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '#flagship',
+        start: 'top top',
+        end: '+=2000',
+        pin: true,
+        scrub: 0.8,
+        anticipatePin: 1
+      }
+    });
+
+    tl.to('#flagship-header', {
+      y: -50,
+      scale: 0.94,
+      opacity: 0.4,
+      duration: 1,
+      ease: 'power2.inOut'
+    }, 0);
+
+    tl.to('#card-1', {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      rotateX: 0,
+      duration: 1,
+      ease: 'power2.out'
+    }, 0.3);
+
+    tl.to('#card-2', {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      rotateX: 0,
+      duration: 1,
+      ease: 'power2.out'
+    }, 0.7);
+
+    tl.to('#card-3', {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      rotateX: 0,
+      duration: 1,
+      ease: 'power2.out'
+    }, 1.1);
+
+    // ─────────────────────────────────────────────────────────────
+    // 3. Interactive CLI Terminal Logic
+    // ─────────────────────────────────────────────────────────────
+    const terminalOutput = document.getElementById('terminal-output');
+    const terminalInput = document.getElementById('terminal-input');
+
+    const COMMANDS = {
+      'help': `Available commands:
+  • syath --bio       : Summary of background, roles, and expertise
+  • syath --stack     : Complete programming, AI, and GIS tech stack
+  • syath --network   : Road network survey metrics across 7 jurisdictions
+  • syath --contact   : Official contact details & communication channels
+  • clear             : Clean terminal window`,
+      
+      'syath --bio': `[BIOGRAPHY]
+Muhammad Syathir Mahfud
+Role: AI Systems Architect & Civil Infrastructure Software Engineer
+Focus:
+  - Pioneer of Harness² (Recursive Multi-Agent Protocol for Civil Data).
+  - Production lead for PKRMS 2026 condition and bridge processing across Provinsi Jambi.
+  - Specializes in zero-hallucination deterministic pipelines, sub-second video telemetry, and high-reliability data migration.`,
+
+      'syath --stack': `[TECH STACK]
+Languages     : Python 3.12, TypeScript/JavaScript, PowerShell, SQL, C++
+AI & Agents   : Harness² Multi-Agent Orchestrator, YOLOv8, OpenCV, PaddleOCR, Claude SDK
+Frontend/UI   : React, Vite, Tailwind CSS, Three.js, GSAP ScrollTrigger, Electron
+Civil & GIS   : PKRMS DB (DAO.DBEngine.120), ArcGIS MPK, GDAL, KMZ/KML, Garmin VIRB 5.4.3, BlackVue GPMF`,
+
+      'syath --network': `[OFFICIAL NETWORK RECONCILIATION - 2026]
+Jurisdiction             Links      Official SK Length
+-------------------------------------------------------
+Provinsi Jambi (15.00)     53 roads    1,183.79 km
+Merangin (15.02)          248 roads    1,128.83 km
+Muaro Jambi (15.05)       149 roads      883.02 km
+Sarolangun (15.03)        203 roads      882.63 km
+Muaro Bungo (15.08)       255 roads      854.20 km
+Tebo (15.09)               75 roads      790.39 km
+Tanjab Barat (15.06)      239 roads      717.41 km
+-------------------------------------------------------
+TOTAL NETWORK           1,222 roads    6,440.27 km (100% Verified)`,
+
+      'syath --contact': `[CONTACT & REACH]
+Email     : syathirmahfud1@gmail.com
+Location  : Jambi, Indonesia
+Status    : Actively architecting and deploying AI & civil infrastructure systems.`
+    };
+
+    function appendOutput(html) {
+      const entry = document.createElement('div');
+      entry.innerHTML = html;
+      terminalOutput.appendChild(entry);
+      terminalOutput.scrollTop = terminalOutput.scrollHeight;
+    }
+
+    function runCommand(cmd) {
+      const cleanCmd = cmd.trim();
+      appendOutput(`<div class="text-zinc-400 mt-2"><span class="text-cyan-400 font-bold">syath&gt;</span> <span class="text-white">${cleanCmd}</span></div>`);
+      
+      if (cleanCmd.toLowerCase() === 'clear') {
+        clearTerminal();
+        return;
+      }
+
+      const res = COMMANDS[cleanCmd] || COMMANDS[cleanCmd.toLowerCase()];
+      if (res) {
+        appendOutput(`<pre class="text-zinc-300 font-mono text-xs whitespace-pre-wrap">${res}</pre>`);
+      } else {
+        appendOutput(`<div class="text-red-400">bash: command not found: ${cleanCmd}. Type <span class="text-cyan-300 font-bold">help</span> for valid commands.</div>`);
+      }
+    }
+
+    function clearTerminal() {
+      terminalOutput.innerHTML = `<div><span class="text-zinc-500"># Terminal buffer cleared. Type 'help' for commands.</span></div>`;
+    }
+
+    function handleTerminalKey(e) {
+      if (e.key === 'Enter') {
+        const val = terminalInput.value;
+        if (val.trim()) {
+          runCommand(val);
+          terminalInput.value = '';
+        }
+      }
+    }
+  </script>
+</body>
+</html>
