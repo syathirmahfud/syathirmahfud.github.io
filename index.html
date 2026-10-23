@@ -43,6 +43,34 @@
     .perspective-container {
       perspective: 1200px;
     }
+        /* Infinite Running Text Marquee */
+    @keyframes marquee-left {
+      0% { transform: translate3d(0, 0, 0); }
+      100% { transform: translate3d(-50%, 0, 0); }
+    }
+    @keyframes marquee-right {
+      0% { transform: translate3d(-50%, 0, 0); }
+      100% { transform: translate3d(0, 0, 0); }
+    }
+    .animate-marquee-left {
+      display: flex;
+      width: max-content;
+      animation: marquee-left 35s linear infinite;
+      will-change: transform;
+    }
+    .animate-marquee-right {
+      display: flex;
+      width: max-content;
+      animation: marquee-right 40s linear infinite;
+      will-change: transform;
+    }
+    .animate-marquee-bg {
+      display: flex;
+      width: max-content;
+      animation: marquee-left 70s linear infinite;
+      will-change: transform;
+    }
+
     /* 3D Tilt Parallax & Spotlight */
     .tilt-card {
       transform-style: preserve-3d;
@@ -77,6 +105,16 @@
   <!-- Top Scroll Progress Bar -->
   <div id="scroll-progress" class="fixed top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 z-[100] transform origin-left scale-x-0 will-change-transform shadow-[0_0_10px_rgba(56,189,248,0.7)]"></div>
 
+
+  <!-- Giant Ambient Background Running Text (Depth Layer) -->
+  <div class="fixed inset-0 pointer-events-none z-[1] overflow-hidden flex flex-col justify-between py-24 select-none opacity-[0.035]">
+    <div class="animate-marquee-bg text-8xl md:text-9xl font-black font-mono tracking-widest text-white whitespace-nowrap">
+      HARNESS² DUAL RECURSION PROTOCOL • PKRMS 2026 CIVIL DATA ENGINE • COMPUTER VISION TELEMETRY • ZERO HALLUCINATION • 6,440 KM NETWORK • 1,222 ROAD LINKS • HARNESS² DUAL RECURSION PROTOCOL • PKRMS 2026 CIVIL DATA ENGINE • COMPUTER VISION TELEMETRY • ZERO HALLUCINATION • 6,440 KM NETWORK • 1,222 ROAD LINKS • 
+    </div>
+    <div class="animate-marquee-right text-8xl md:text-9xl font-black font-mono tracking-widest text-cyan-300 whitespace-nowrap">
+      AUTONOMOUS MULTI-AGENT HARNESS • DETERMINISTIC SCORE GATES • BLACKVUE & VIRB TELEMETRY • DAO.DBENGINE.120 • GEOSPATIAL KMZ & SHP • YOLOv8 DEFECT DETECTION • AUTONOMOUS MULTI-AGENT HARNESS • DETERMINISTIC SCORE GATES • BLACKVUE & VIRB TELEMETRY • DAO.DBENGINE.120 • GEOSPATIAL KMZ & SHP • YOLOv8 DEFECT DETECTION • 
+    </div>
+  </div>
 
   <!-- Three.js Canvas Container (Antigravity Particles) -->
   <div id="canvas-container" class="fixed inset-0 pointer-events-none z-0"></div>
@@ -181,6 +219,68 @@
 
     </div>
   </section>
+
+  <!-- Infinite Running Text Marquee Ribbon -->
+  <div class="relative z-20 py-4 border-y border-zinc-800/80 bg-zinc-950/80 backdrop-blur-xl overflow-hidden shadow-[0_0_30px_rgba(0,0,0,0.8)]">
+    <!-- Gradient glow edge masks -->
+    <div class="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-zinc-950 to-transparent z-10 pointer-events-none"></div>
+    <div class="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-zinc-950 to-transparent z-10 pointer-events-none"></div>
+
+    <div class="animate-marquee-left flex items-center gap-8 whitespace-nowrap font-mono text-xs tracking-wider">
+      <div class="flex items-center gap-2 text-cyan-400 font-bold px-3 py-1 rounded-full bg-cyan-950/40 border border-cyan-800/40">
+        <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping"></span>
+        <span>6,440 KM VERIFIED NETWORK</span>
+      </div>
+      <span class="text-zinc-600">✦</span>
+      <span class="text-zinc-300 font-semibold">1,222 OFFICIAL SK ROAD LINKS</span>
+      <span class="text-zinc-600">✦</span>
+      <div class="flex items-center gap-2 text-purple-400 font-bold px-3 py-1 rounded-full bg-purple-950/40 border border-purple-800/40">
+        <span>HARNESS² DUAL RECURSION PROTOCOL</span>
+      </div>
+      <span class="text-zinc-600">✦</span>
+      <span class="text-zinc-300 font-semibold">YOLOv8 4K ROAD DISTRESS PIPELINE</span>
+      <span class="text-zinc-600">✦</span>
+      <div class="flex items-center gap-2 text-emerald-400 font-bold px-3 py-1 rounded-full bg-emerald-950/40 border border-emerald-800/40">
+        <span>7 PROVINSI JAMBI JURISDICTIONS</span>
+      </div>
+      <span class="text-zinc-600">✦</span>
+      <span class="text-zinc-300 font-semibold">ELECTRON + VITE BRIDGES PLATFORM</span>
+      <span class="text-zinc-600">✦</span>
+      <div class="flex items-center gap-2 text-amber-400 font-bold px-3 py-1 rounded-full bg-amber-950/40 border border-amber-800/40">
+        <span>SUB-SECOND GPS TELEMETRY RETIMING</span>
+      </div>
+      <span class="text-zinc-600">✦</span>
+      <span class="text-zinc-300 font-semibold">DETERMINISTIC SCORE GATES (0 HALLUCINATION)</span>
+      <span class="text-zinc-600">✦</span>
+
+      <!-- Duplicate Set for Seamless Infinite Loop -->
+      <div class="flex items-center gap-2 text-cyan-400 font-bold px-3 py-1 rounded-full bg-cyan-950/40 border border-cyan-800/40">
+        <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping"></span>
+        <span>6,440 KM VERIFIED NETWORK</span>
+      </div>
+      <span class="text-zinc-600">✦</span>
+      <span class="text-zinc-300 font-semibold">1,222 OFFICIAL SK ROAD LINKS</span>
+      <span class="text-zinc-600">✦</span>
+      <div class="flex items-center gap-2 text-purple-400 font-bold px-3 py-1 rounded-full bg-purple-950/40 border border-purple-800/40">
+        <span>HARNESS² DUAL RECURSION PROTOCOL</span>
+      </div>
+      <span class="text-zinc-600">✦</span>
+      <span class="text-zinc-300 font-semibold">YOLOv8 4K ROAD DISTRESS PIPELINE</span>
+      <span class="text-zinc-600">✦</span>
+      <div class="flex items-center gap-2 text-emerald-400 font-bold px-3 py-1 rounded-full bg-emerald-950/40 border border-emerald-800/40">
+        <span>7 PROVINSI JAMBI JURISDICTIONS</span>
+      </div>
+      <span class="text-zinc-600">✦</span>
+      <span class="text-zinc-300 font-semibold">ELECTRON + VITE BRIDGES PLATFORM</span>
+      <span class="text-zinc-600">✦</span>
+      <div class="flex items-center gap-2 text-amber-400 font-bold px-3 py-1 rounded-full bg-amber-950/40 border border-amber-800/40">
+        <span>SUB-SECOND GPS TELEMETRY RETIMING</span>
+      </div>
+      <span class="text-zinc-600">✦</span>
+      <span class="text-zinc-300 font-semibold">DETERMINISTIC SCORE GATES (0 HALLUCINATION)</span>
+      <span class="text-zinc-600">✦</span>
+    </div>
+  </div>
 
   <!-- 2. Pinned GSAP ScrollTrigger Showcase (The 3 Flagship Architecture Pillars) -->
   <section id="flagship" class="relative z-10 min-h-screen flex flex-col justify-center items-center px-6 py-24 max-w-7xl mx-auto">
