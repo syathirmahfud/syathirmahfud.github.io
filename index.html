@@ -43,6 +43,16 @@
     .perspective-container {
       perspective: 1200px;
     }
+    /* 3D Tilt Parallax & Spotlight */
+    .tilt-card {
+      transform-style: preserve-3d;
+      transition: transform 0.15s ease-out, border-color 0.3s ease;
+      will-change: transform;
+    }
+    .tilt-card:hover {
+      box-shadow: 0 20px 40px -15px rgba(56, 189, 248, 0.2);
+    }
+
     /* Sleek dark scrollbar */
     ::-webkit-scrollbar {
       width: 7px;
@@ -63,6 +73,10 @@
   </style>
 </head>
 <body class="bg-zinc-950 text-zinc-100 min-h-screen overflow-x-hidden selection:bg-cyan-500/30 font-sans antialiased">
+
+  <!-- Top Scroll Progress Bar -->
+  <div id="scroll-progress" class="fixed top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 z-[100] transform origin-left scale-x-0 will-change-transform shadow-[0_0_10px_rgba(56,189,248,0.7)]"></div>
+
 
   <!-- Three.js Canvas Container (Antigravity Particles) -->
   <div id="canvas-container" class="fixed inset-0 pointer-events-none z-0"></div>
@@ -288,7 +302,7 @@
     <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       
       <!-- Project 1: PKRMS Bridge Dashboard -->
-      <div data-category="civil" class="project-card rounded-2xl p-6 bg-zinc-900/50 border border-zinc-800/80 hover:border-cyan-500/50 transition-all duration-300 hover:-translate-y-1 backdrop-blur-md flex flex-col justify-between">
+      <div data-category="civil" class="project-card tilt-card rounded-2xl p-6 bg-zinc-900/50 border border-zinc-800/80 hover:border-cyan-500/50 transition-all duration-300 hover:-translate-y-1 backdrop-blur-md flex flex-col justify-between">
         <div>
           <div class="flex items-center justify-between mb-4">
             <span class="text-xs font-mono text-cyan-400">Desktop Application</span>
@@ -307,7 +321,7 @@
       </div>
 
       <!-- Project 2: PKRMS PDF Report Engine -->
-      <div data-category="civil" class="project-card rounded-2xl p-6 bg-zinc-900/50 border border-zinc-800/80 hover:border-purple-500/50 transition-all duration-300 hover:-translate-y-1 backdrop-blur-md flex flex-col justify-between">
+      <div data-category="civil" class="project-card tilt-card rounded-2xl p-6 bg-zinc-900/50 border border-zinc-800/80 hover:border-purple-500/50 transition-all duration-300 hover:-translate-y-1 backdrop-blur-md flex flex-col justify-between">
         <div>
           <div class="flex items-center justify-between mb-4">
             <span class="text-xs font-mono text-purple-400">Civil Engineering Engine</span>
@@ -326,7 +340,7 @@
       </div>
 
       <!-- Project 3: VIRB Automation Suite -->
-      <div data-category="civil" class="project-card rounded-2xl p-6 bg-zinc-900/50 border border-zinc-800/80 hover:border-blue-500/50 transition-all duration-300 hover:-translate-y-1 backdrop-blur-md flex flex-col justify-between">
+      <div data-category="civil" class="project-card tilt-card rounded-2xl p-6 bg-zinc-900/50 border border-zinc-800/80 hover:border-blue-500/50 transition-all duration-300 hover:-translate-y-1 backdrop-blur-md flex flex-col justify-between">
         <div>
           <div class="flex items-center justify-between mb-4">
             <span class="text-xs font-mono text-blue-400">Telemetry Automation</span>
@@ -345,7 +359,7 @@
       </div>
 
       <!-- Project 4: YOLO Road Defect Detector -->
-      <div data-category="vision" class="project-card rounded-2xl p-6 bg-zinc-900/50 border border-zinc-800/80 hover:border-emerald-500/50 transition-all duration-300 hover:-translate-y-1 backdrop-blur-md flex flex-col justify-between">
+      <div data-category="vision" class="project-card tilt-card rounded-2xl p-6 bg-zinc-900/50 border border-zinc-800/80 hover:border-emerald-500/50 transition-all duration-300 hover:-translate-y-1 backdrop-blur-md flex flex-col justify-between">
         <div>
           <div class="flex items-center justify-between mb-4">
             <span class="text-xs font-mono text-emerald-400">Deep Learning</span>
@@ -364,7 +378,7 @@
       </div>
 
       <!-- Project 5: Spatial GPX Retimer -->
-      <div data-category="vision" class="project-card rounded-2xl p-6 bg-zinc-900/50 border border-zinc-800/80 hover:border-amber-500/50 transition-all duration-300 hover:-translate-y-1 backdrop-blur-md flex flex-col justify-between">
+      <div data-category="vision" class="project-card tilt-card rounded-2xl p-6 bg-zinc-900/50 border border-zinc-800/80 hover:border-amber-500/50 transition-all duration-300 hover:-translate-y-1 backdrop-blur-md flex flex-col justify-between">
         <div>
           <div class="flex items-center justify-between mb-4">
             <span class="text-xs font-mono text-amber-400">Spatial Math Tool</span>
@@ -383,7 +397,7 @@
       </div>
 
       <!-- Project 6: Usage & Token Forensic Monitor -->
-      <div data-category="agent" class="project-card rounded-2xl p-6 bg-zinc-900/50 border border-zinc-800/80 hover:border-cyan-500/50 transition-all duration-300 hover:-translate-y-1 backdrop-blur-md flex flex-col justify-between">
+      <div data-category="agent" class="project-card tilt-card rounded-2xl p-6 bg-zinc-900/50 border border-zinc-800/80 hover:border-cyan-500/50 transition-all duration-300 hover:-translate-y-1 backdrop-blur-md flex flex-col justify-between">
         <div>
           <div class="flex items-center justify-between mb-4">
             <span class="text-xs font-mono text-cyan-400">Agentic Observability</span>
@@ -537,6 +551,33 @@
     const particles = new THREE.Points(geometry, material);
     scene.add(particles);
 
+    // ── Quantum Core Wireframe Geometry (Ambient depth object) ──
+    const coreGeo = new THREE.IcosahedronGeometry(12, 1);
+    const coreMat = new THREE.MeshBasicMaterial({
+      color: 0x38bdf8,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.12,
+    });
+    const quantumCore = new THREE.Mesh(coreGeo, coreMat);
+    scene.add(quantumCore);
+
+    // ── Constellation Line Segments (Dynamic neural web) ──
+    const MAX_LINES = 600;
+    const linePositions = new Float32Array(MAX_LINES * 6);
+    const lineColors = new Float32Array(MAX_LINES * 6);
+    const lineGeo = new THREE.BufferGeometry();
+    lineGeo.setAttribute('position', new THREE.BufferAttribute(linePositions, 3).setUsage(THREE.DynamicDrawUsage));
+    lineGeo.setAttribute('color', new THREE.BufferAttribute(lineColors, 3).setUsage(THREE.DynamicDrawUsage));
+    const lineMat = new THREE.LineBasicMaterial({
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.45,
+      blending: THREE.AdditiveBlending,
+    });
+    const constellationLines = new THREE.LineSegments(lineGeo, lineMat);
+    scene.add(constellationLines);
+
     // Pointer Tracking in 3D Space (Mouse + Mobile Touch Support)
     const mouse = { x: 9999, y: 9999, targetX: 9999, targetY: 9999 };
     function updatePointerPos(clientX, clientY) {
@@ -594,7 +635,45 @@
       }
 
       geometry.attributes.position.needsUpdate = true;
-      particles.rotation.y = elapsed * 0.02;
+      particles.rotation.y = elapsed * 0.015;
+
+      // Animate Quantum Core Wireframe
+      quantumCore.rotation.x = elapsed * 0.05;
+      quantumCore.rotation.y = elapsed * 0.08;
+      quantumCore.position.y = Math.sin(elapsed * 0.5) * 2;
+
+      // Dynamic Constellation Lines calculation (60 FPS optimized subset)
+      let lineIdx = 0;
+      const step = 8; // sample every 8th particle for optimal performance
+      for (let a = 0; a < 240 && lineIdx < MAX_LINES; a += step) {
+        for (let b = a + step; b < 240 && lineIdx < MAX_LINES; b += step) {
+          const ia = a * 3;
+          const ib = b * 3;
+          const distSq = (pos[ia] - pos[ib])**2 + (pos[ia+1] - pos[ib+1])**2 + (pos[ia+2] - pos[ib+2])**2;
+          if (distSq < 130) { // connection threshold ~11.4 units
+            const l6 = lineIdx * 6;
+            linePositions[l6] = pos[ia];
+            linePositions[l6+1] = pos[ia+1];
+            linePositions[l6+2] = pos[ia+2];
+            linePositions[l6+3] = pos[ib];
+            linePositions[l6+4] = pos[ib+1];
+            linePositions[l6+5] = pos[ib+2];
+
+            const alpha = Math.max(0.1, 1 - Math.sqrt(distSq) / 11.4);
+            lineColors[l6] = 0.22 * alpha;
+            lineColors[l6+1] = 0.74 * alpha;
+            lineColors[l6+2] = 0.97 * alpha;
+            lineColors[l6+3] = 0.66 * alpha;
+            lineColors[l6+4] = 0.33 * alpha;
+            lineColors[l6+5] = 0.97 * alpha;
+            lineIdx++;
+          }
+        }
+      }
+      lineGeo.setDrawRange(0, lineIdx * 2);
+      lineGeo.attributes.position.needsUpdate = true;
+      lineGeo.attributes.color.needsUpdate = true;
+
       renderer.render(scene, camera);
     }
     animate();
@@ -794,6 +873,38 @@ Status    : Actively architecting and deploying AI & civil infrastructure system
         showToast('syathirmahfud1@gmail.com');
       });
     }
+
+        // ─────────────────────────────────────────────────────────────
+    // 5. 3D Tilt Parallax + Scroll Progress Tracker
+    // ─────────────────────────────────────────────────────────────
+    // Scroll progress bar
+    window.addEventListener('scroll', () => {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = h > 0 ? window.scrollY / h : 0;
+      const bar = document.getElementById('scroll-progress');
+      if (bar) bar.style.transform = `scaleX(${pct})`;
+    }, { passive: true });
+
+    // Interactive 3D Card Spotlight & Tilt Physics
+    document.querySelectorAll('.tilt-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -7;
+        const rotateY = ((x - centerX) / centerX) * 7;
+
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.025, 1.025, 1.025)`;
+        card.style.background = `radial-gradient(350px circle at ${x}px ${y}px, rgba(56, 189, 248, 0.12), transparent 80%), rgba(24, 24, 27, 0.55)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+        card.style.background = '';
+      });
+    });
 
     function filterProjects(cat, btn) {
       playTypeBlip();
